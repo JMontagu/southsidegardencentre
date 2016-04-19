@@ -1,0 +1,32 @@
+@import 'customVariables';
+@import 'bootstrap-custom';
+
+aside {
+	margin-top: 1.25rem;
+
+	li {
+		padding-bottom: 1rem;
+	}
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+nav {
+	.navbar-brand {
+		padding-top: 20px;
+	}
+
+	@media (max-width: 320px) {
+		.logo {
+			max-width: 185px;
+		}
+	}
+}
+
+aside {
+	.email {
+		word-wrap: break-word;
+	}
+}
