@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +27,7 @@
 
     <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -87,10 +86,11 @@
           </div>
     		</div>
     		<aside class="col-md-3">
-    			<h4>Open today 10am&mdash;5pm</h4>
+    			<h4><i>Winter hours</i>:</h4>
+          <h4 id="opening-info">Open today from 10am&mdash;4pm</h4>
   				<ul class="fa-ul">
 					  <li>
-              <i class="fa-li fa fa-clock-o" aria-hidden="true"></i>10am to 5pm, 7 days a week
+              <i class="fa-li fa fa-clock-o" aria-hidden="true"></i>Open 10am to 4pm, Fri, Sat and Sun. Closed Mon&mdash;Thurs.
             </li>
 					  <li>
               <i class="fa-li fa fa-phone" aria-hidden="true"></i><a href="tel:+6437557122">03 755 7122</a>
@@ -118,6 +118,38 @@
   		</footer>
     </div> <!-- /container -->
 
+    <script type="text/javascript">
+      (function() {
+        var weekday = new Array(7);
+        weekday[0]=  "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+        var daysOpen = {
+          Sunday: true,
+          Monday: false,
+          Tuesday: false,
+          Wednesday: false,
+          Thursday: false,
+          Friday: true,
+          Saturday: true
+        };
+
+        var openingInfo = document.getElementById('opening-info');
+        var d = new Date();
+
+        var currentDay = weekday[d.getDay()];
+        var isOpen = daysOpen[currentDay];
+
+        if(!isOpen) {
+          openingInfo.innerHTML = 'Closed today.';
+        }
+      }());
+    </script>
     <script>
       // Hacky McHackFace
       var enquiryForm = document.getElementById('enquiryForm');
@@ -179,3 +211,5 @@
     </script>
   </body>
 </html>
+
+
