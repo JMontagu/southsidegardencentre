@@ -6,6 +6,5 @@ deployment:
   prod:
     branch: master
     commands:
-      - npm install
       - gulp build
-      - aws s3 sync public/ s3://www.southsidegardencentre.co.nz.s3.amazonaws.com --delete
+      - aws s3 sync public/ s3://www.southsidegardencentre.co.nz --region ap-southeast-2 --delete 
