@@ -1,16 +1,11 @@
-dependencies:
-    override:
-        - bundle install
-        - sudo pip install awscli
-
 test:
   override:
     - echo "test"
 
 deployment:
-    aws:
+  prod:
     branch: master
-        commands:
-        - npm install
-        - gulp build
-        - /bin/bash publish.sh
+    commands:
+      - npm install
+      - gulp build
+      - aws s3 sync public/ s3://test-southside --delete
