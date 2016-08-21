@@ -1,3 +1,16 @@
+dependencies:
+    override:
+        - bundle install
+        - sudo pip install awscli
+
 test:
   override:
     - echo "test"
+
+deployment:
+    aws:
+    branch: master
+        commands:
+        - npm install
+        - gulp build
+        - /bin/bash publish.sh
