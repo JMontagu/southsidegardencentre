@@ -21,9 +21,9 @@ gulp.task('styles', function() {
 		}).on('error', sass.logError))
 		.pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
 		.pipe(concat('main.css'))
-		.pipe(uncss({
-			html: ['./public/index.html']
-		}))
+		// .pipe(uncss({
+		// 	html: ['./public/index.html']
+		// }))
 		.pipe(nano())
 		.pipe(gulp.dest('./public/css'));
 });

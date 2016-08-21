@@ -1,6 +1,17 @@
 @import 'customVariables';
 @import 'bootstrap-custom';
 
+.plant-info {
+	h4 {
+		color: $gray-light;
+		font-size: $font-size-h4*0.95;
+		font-weight: 400;
+	}
+
+  padding-bottom: 1em;
+  border-bottom: 2.5px solid #2ba6cb;
+}
+
 aside {
 	margin-top: 1.25rem;
 
@@ -11,6 +22,10 @@ aside {
 
 .navbar {
 	margin-bottom: 0;
+}
+
+.navbar-nav {
+    margin: 0 -15px;
 }
 
 nav {
@@ -30,3 +45,9 @@ aside {
 		word-wrap: break-word;
 	}
 }
+
+/* enables CSS3 transition for simple collapses, accordion and also navbar in responsive view */
+.collapse { transition: height .3s ease-out; /*-webkit-transition: height .3s ease-out*/ } 
+
+/* styles the close button for the dismissible popovers */
+.popover .close { position: absolute; top: 7px; right: 10px; }

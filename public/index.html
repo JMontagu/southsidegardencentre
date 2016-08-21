@@ -37,25 +37,26 @@
 
   <body>
     <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Menu</span>
-            <i class="fa fa-bars fa-lg"></i> Menu
-          </button> -->
-          <a class="navbar-brand" href="/">
-          	<img class="logo" src="img/logo-v1.png" alt="Southside Garden Centre"/>
-          </a>
-        </div>
-        <!-- <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="/">Home</a></li>
-          </ul>
-        </div> --><!--/.nav-collapse -->
-      </div>
-    </nav>
     <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <i class="fa fa-bars"></i> Menu
+            </button>
+            <a class="navbar-brand" href="/">
+              <img class="logo" src="img/logo-v1.png" alt="Southside Garden Centre">
+            </a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./index.html">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="./plants.html">Plants</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
       <img class="img-responsive hidden-xs" src="img/kakabeak-clianthus-flowers_Billboard.jpg"/>
       <section class="row">
       	<div class="col-md-9">
@@ -117,7 +118,7 @@
 
   		</footer>
     </div> <!-- /container -->
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/1.0.2/bootstrap-native.min.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
