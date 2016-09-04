@@ -1,16 +1,16 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
 
-var config = {
+const config = {
      bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
 }
 
-gulp.task('styles', function() {
-	var sass = require('gulp-sass');
-	var concat = require('gulp-concat');
-	var nano = require('gulp-cssnano');
-	var uncss = require('gulp-uncss');
-	var postcss      = require('gulp-postcss');
-  var autoprefixer = require('autoprefixer');
+gulp.task('styles', () => {
+	const sass = require('gulp-sass');
+	const concat = require('gulp-concat');
+	const nano = require('gulp-cssnano');
+	const uncss = require('gulp-uncss');
+	const postcss      = require('gulp-postcss');
+  const autoprefixer = require('autoprefixer');
 
 	gulp.src('sass/**/*.scss')
 		.pipe(sass({
@@ -28,7 +28,7 @@ gulp.task('styles', function() {
 		.pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('default', function() {
+gulp.task('default', () => {
 	gulp.watch('sass/**/*.scss', ['styles']);
 })
 
