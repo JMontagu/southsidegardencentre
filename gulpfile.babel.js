@@ -1,8 +1,23 @@
 const gulp = require('gulp');
+const nunjucks = require('gulp-nunjucks-html');
+const data = require('gulp-data');
+const frontMatter = require('gulp-front-matter');
 
 const config = {
      bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
 }
+
+gulp.task('nunjucks', () => {
+	return gulp.src(['templates/**/*.html', '!templates/base.html'])
+		.pipe(data(function() {
+			return require('./siteConfig.json')
+		}))
+		.pipe(frontMatter())
+		.pipe(nunjucks({
+			searchPaths: ['templates']
+		}))
+		.pipe(gulp.dest('public'));
+})
 
 gulp.task('styles', () => {
 	const sass = require('gulp-sass');
@@ -30,6 +45,7 @@ gulp.task('styles', () => {
 
 gulp.task('default', () => {
 	gulp.watch('sass/**/*.scss', ['styles']);
+	gulp.watch('templates/**/*.html', ['nunjucks']);
 })
 
-gulp.task('build', ['styles']);
+gulp.task('build', ['nunjucks','styles']);

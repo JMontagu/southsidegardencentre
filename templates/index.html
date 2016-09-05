@@ -1,0 +1,40 @@
+---
+name: Home
+title: Home
+description: Hokitika garden centre supplying a quality flowering plants, trees, gardening supplies and expert advice to the West Coast for 25 years. Open daily.
+billboard:
+  src: ./img/kakabeak-clianthus-flowers_Billboard.jpg
+  alt: Kakabeak (Clianthus) flowers
+---
+
+{% extends "./base.html" %}
+
+{% block body %}
+  <div class="col-md-9">
+    <h2>Beautiful plants. Friendly service. Locally owned and operated.</h2>
+    <p class="lead">For the best trees, plants, gardening supplies or expert advice, we're your West Coast garden centre and nursery. Located in Hokitika, we've been helping West Coast gardeners for over 20 years. How can we help you?</p>
+    <p>With 25 years of West Coast gardening knowledge, we've got a wide range of plants, trees and shrubs that suit our unique West Coast environment.</p>
+    <form id="enquiryForm">
+      <fieldset>
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input required type="text" class="form-control" id="name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input required type="email" class="form-control" id="email" placeholder="Your email">
+        </div>
+        <div class="form-group">
+          <label for="messageInput">Message</label>
+          <textarea required class="form-control" rows="3" id="message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="enquiryFormSubmit">
+          <i class="fa fa-spinner fa-spin" style="display: none;"></i> Send enquiry
+        </button>
+      </fieldset>
+    </form>
+    <div id="enquiryFormComplete" class="hidden">
+      <p class="bg-success lead">Thank you, your enquiry has been sent. We'll get back to you very soon!</p>
+    </div>
+  </div>
+{% endblock %}

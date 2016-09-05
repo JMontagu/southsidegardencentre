@@ -1,0 +1,17 @@
+{
+	"siteTitle": " - Garden Centre and Plant Nursery Hokitika - Southside Garden Centre",
+	"nav": [
+		{
+			"name": "Home",
+			"href": "./index.html"
+		},
+		{
+			"name": "Plants",
+			"href": "./plants.html"
+		},
+		{
+			"name": "Landscaping Supplies",
+			"href": "./landscaping-supplies.html"
+		}
+	]
+}
