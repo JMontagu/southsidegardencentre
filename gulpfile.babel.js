@@ -4,17 +4,17 @@ const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
 
 const config = {
-     bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
+ 	bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets',
 }
 
 gulp.task('nunjucks', () => {
-	return gulp.src(['templates/**/*.html', '!templates/base.html'])
+	return gulp.src(['src/templates/**/*.html', '!src/templates/base.html'])
 		.pipe(data(function() {
-			return require('./siteConfig.json')
+			return require('./src/siteConfig.json')
 		}))
 		.pipe(frontMatter())
 		.pipe(nunjucks({
-			searchPaths: ['templates']
+			searchPaths: ['src/templates']
 		}))
 		.pipe(gulp.dest('public'));
 })
@@ -24,10 +24,10 @@ gulp.task('styles', () => {
 	const concat = require('gulp-concat');
 	const nano = require('gulp-cssnano');
 	const uncss = require('gulp-uncss');
-	const postcss      = require('gulp-postcss');
+	const postcss = require('gulp-postcss');
   const autoprefixer = require('autoprefixer');
 
-	gulp.src('sass/**/*.scss')
+	gulp.src('src/sass/**/*.scss')
 		.pipe(sass({
 			style: 'compressed',
 			includePaths: [
@@ -44,8 +44,8 @@ gulp.task('styles', () => {
 });
 
 gulp.task('default', () => {
-	gulp.watch('sass/**/*.scss', ['styles']);
-	gulp.watch('templates/**/*.html', ['nunjucks']);
+	gulp.watch('src/sass/**/*.scss', ['styles']);
+	gulp.watch('src/templates/**/*.html', ['nunjucks']);
 })
 
 gulp.task('build', ['nunjucks','styles']);
