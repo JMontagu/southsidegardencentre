@@ -36,9 +36,19 @@ gulp.task('styles', () => {
 		}).on('error', sass.logError))
 		.pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
 		.pipe(concat('main.css'))
-		// .pipe(uncss({
-		// 	html: ['./public/index.html']
-		// }))
+		.pipe(uncss({
+			html: ['./public/**/*.html'],
+			ignore: [
+			  '.fade',
+			  '.fade.in',
+			  '.collapse',
+			  '.collapse.in',
+			  '.collapsing',
+			  '.alert-danger',
+			  '.open',
+			  '/open+/'
+			 ]
+		}))
 		.pipe(nano())
 		.pipe(gulp.dest('./public/css'));
 });
