@@ -2,9 +2,10 @@ const gulp = require('gulp');
 const nunjucks = require('gulp-nunjucks-html');
 const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
+const imagemin = require('gulp-imagemin');
 
 const config = {
- 	bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets',
+ 	bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
 }
 
 gulp.task('nunjucks', () => {
@@ -18,6 +19,12 @@ gulp.task('nunjucks', () => {
 		}))
 		.pipe(gulp.dest('public'));
 })
+
+gulp.task('images', () => {
+	gulp.src('./src/images/**/*')
+	  .pipe(imagemin())
+	  .pipe(gulp.dest('./public/img'));
+});
 
 gulp.task('styles', () => {
 	const sass = require('gulp-sass');
@@ -56,6 +63,7 @@ gulp.task('styles', () => {
 gulp.task('default', () => {
 	gulp.watch('src/sass/**/*.scss', ['styles']);
 	gulp.watch('src/templates/**/*.html', ['nunjucks']);
+	gulp.watch('src/images/*', ['images']);
 })
 
-gulp.task('build', ['nunjucks','styles']);
+gulp.task('build', ['images','nunjucks','styles']);
