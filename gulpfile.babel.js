@@ -3,6 +3,7 @@ const nunjucks = require('gulp-nunjucks-html');
 const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
 const imagemin = require('gulp-imagemin');
+const critical = require('critical').stream;
 
 const config = {
  	bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
@@ -21,12 +22,12 @@ gulp.task('nunjucks', () => {
 })
 
 gulp.task('images', () => {
-	gulp.src('./src/images/**/*')
+	return gulp.src('./src/images/**/*')
 	  .pipe(imagemin())
 	  .pipe(gulp.dest('./public/img'));
 });
 
-gulp.task('styles', () => {
+gulp.task('styles', ['nunjucks'], () => {
 	const sass = require('gulp-sass');
 	const concat = require('gulp-concat');
 	const nano = require('gulp-cssnano');
@@ -34,7 +35,7 @@ gulp.task('styles', () => {
 	const postcss = require('gulp-postcss');
   const autoprefixer = require('autoprefixer');
 
-	gulp.src('src/sass/**/*.scss')
+	return gulp.src('src/sass/**/*.scss')
 		.pipe(sass({
 			style: 'compressed',
 			includePaths: [
@@ -60,10 +61,16 @@ gulp.task('styles', () => {
 		.pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('default', () => {
+gulp.task('critical', ['styles'], (cb) => {
+  return gulp.src('public/**/*.html')
+    .pipe(critical({base: 'public/', inline: true, minify: true}))
+    .pipe(gulp.dest('public'));
+});
+
+gulp.task('watch', () => {
 	gulp.watch('src/sass/**/*.scss', ['styles']);
 	gulp.watch('src/templates/**/*.html', ['nunjucks']);
 	gulp.watch('src/images/*', ['images']);
 })
 
-gulp.task('build', ['images','nunjucks','styles']);
+gulp.task('build', ['images','nunjucks','styles','critical']);
