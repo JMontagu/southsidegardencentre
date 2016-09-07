@@ -5,9 +5,11 @@ const frontMatter = require('gulp-front-matter');
 const imagemin = require('gulp-imagemin');
 const critical = require('critical').stream;
 const htmlmin = require('gulp-htmlmin');
+const ext_replace = require('gulp-ext-replace');
+const del = require('del');
 
 const config = {
- 	bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
+  bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
 }
 
 gulp.task('nunjucks', () => {
@@ -20,13 +22,13 @@ gulp.task('nunjucks', () => {
 			searchPaths: ['src/templates']
 		}))
     .pipe(htmlmin({collapseWhitespace: true}))
-		.pipe(gulp.dest('public'));
+		.pipe(gulp.dest('dist'));
 })
 
 gulp.task('images', () => {
 	return gulp.src('./src/images/**/*')
 	  .pipe(imagemin())
-	  .pipe(gulp.dest('./public/img'));
+	  .pipe(gulp.dest('./dist/img'));
 });
 
 gulp.task('styles', ['nunjucks'], () => {
@@ -47,7 +49,7 @@ gulp.task('styles', ['nunjucks'], () => {
 		.pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
 		.pipe(concat('main.css'))
 		.pipe(uncss({
-			html: ['./public/**/*.html'],
+			html: ['./dist/**/*.html'],
 			ignore: [
 			  '.fade',
 			  '.fade.in',
@@ -60,13 +62,14 @@ gulp.task('styles', ['nunjucks'], () => {
 			 ]
 		}))
 		.pipe(nano())
-		.pipe(gulp.dest('./public/css'));
+		.pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('critical', ['styles'], (cb) => {
-  return gulp.src('public/**/*.html')
-    .pipe(critical({base: 'public/', inline: true, minify: true}))
-    .pipe(gulp.dest('public'));
+gulp.task('build:s3', ['build'], () => {
+  return gulp.src('dist/**/*.html')
+    .pipe(critical({base: 'dist', inline: true, minify: true}))
+    .pipe(ext_replace(''))
+    .pipe(gulp.dest('dist/pages'));
 });
 
 gulp.task('watch', () => {
@@ -75,4 +78,4 @@ gulp.task('watch', () => {
 	gulp.watch('src/images/*', ['images']);
 })
 
-gulp.task('build', ['images','nunjucks','styles','critical']);
+gulp.task('build', ['images','nunjucks','styles']);

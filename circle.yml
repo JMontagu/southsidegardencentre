@@ -11,6 +11,6 @@ deployment:
     branch: master
     commands:
       - npm rebuild node-sass
-      - gulp build
-      - aws s3 sync public/ s3://www.southsidegardencentre.co.nz --exclude "*.jpg" --exclude "*.png" --region ap-southeast-2 --delete
-      - aws s3 sync public/ s3://www.southsidegardencentre.co.nz --exclude "*" --include "*.jpg" --include "*.png" --region ap-southeast-2 --delete --metadata-directive REPLACE --expires 2034-01-01T00:00:00Z --acl public-read --cache-control max-age=2592000,public
+      - gulp build:s3
+      - aws s3 sync dist/ s3://www.southsidegardencentre.co.nz --exclude "*.jpg" --exclude "*.png" --region ap-southeast-2 --delete
+      - aws s3 sync dist/ s3://www.southsidegardencentre.co.nz --exclude "*" --include "*.jpg" --include "*.png" --region ap-southeast-2 --delete --metadata-directive REPLACE --expires 2034-01-01T00:00:00Z --acl public-read --cache-control max-age=2592000,public
