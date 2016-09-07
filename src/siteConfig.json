@@ -3,19 +3,19 @@
 	"nav": [
 		{
 			"name": "Home",
-			"href": "./index.html"
+			"href": "./"
 		},
 		{
 			"name": "Plants",
-			"href": "./plants.html"
+			"href": "./plants"
 		},
 		{
 			"name": "Landscaping Supplies",
-			"href": "./landscaping-supplies.html"
+			"href": "./landscaping-supplies"
 		},
 		{
 			"name": "Saturday in the Garden",
-			"href": "./saturday-in-the-garden.html"
+			"href": "./saturday-in-the-garden"
 		}
 	]
 }
