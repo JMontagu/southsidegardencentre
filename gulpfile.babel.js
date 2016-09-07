@@ -4,6 +4,7 @@ const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
 const imagemin = require('gulp-imagemin');
 const critical = require('critical').stream;
+const htmlmin = require('gulp-htmlmin');
 
 const config = {
  	bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
@@ -18,6 +19,7 @@ gulp.task('nunjucks', () => {
 		.pipe(nunjucks({
 			searchPaths: ['src/templates']
 		}))
+    .pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest('public'));
 })
 
