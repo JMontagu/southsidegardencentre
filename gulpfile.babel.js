@@ -68,6 +68,7 @@ gulp.task('styles', ['nunjucks'], () => {
 gulp.task('build:s3', ['build'], () => {
   return gulp.src('dist/**/*.html')
     .pipe(critical({base: 'dist', inline: true, minify: true}))
+    .pipe(gulp.dest('dist'))
     .pipe(ext_replace(''))
     .pipe(gulp.dest('dist/pages'));
 });
