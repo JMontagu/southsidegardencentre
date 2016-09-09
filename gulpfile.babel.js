@@ -12,6 +12,11 @@ const config = {
   bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
 }
 
+gulp.task('clean', (cb) => {
+  del.sync(['dist']);
+  cb();
+});
+
 gulp.task('nunjucks', () => {
 	return gulp.src(['src/templates/**/*.html', '!src/templates/base.html'])
 		.pipe(data(function() {
@@ -65,6 +70,16 @@ gulp.task('styles', ['nunjucks'], () => {
 		.pipe(gulp.dest('./dist/css'));
 });
 
+gulp.task('fonts', function() {
+  return gulp.src('node_modules/font-awesome/fonts/*')
+    .pipe(gulp.dest('dist/fonts'))
+});
+
+gulp.task('favicon', function() {
+  return gulp.src('src/favicon.ico')
+    .pipe(gulp.dest('dist'))
+})
+
 gulp.task('build:s3', ['build'], () => {
   return gulp.src('dist/**/*.html')
     .pipe(critical({base: 'dist', inline: true, minify: true}))
@@ -79,4 +94,4 @@ gulp.task('watch', () => {
 	gulp.watch('src/images/*', ['images']);
 })
 
-gulp.task('build', ['images','nunjucks','styles']);
+gulp.task('build', ['clean', 'images', 'nunjucks', 'styles', 'fonts', 'favicon']);
