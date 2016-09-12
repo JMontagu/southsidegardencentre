@@ -7,13 +7,16 @@ const critical = require('critical').stream;
 const htmlmin = require('gulp-htmlmin');
 const ext_replace = require('gulp-ext-replace');
 const del = require('del');
+const rev = require('gulp-rev');
+const revReplace = require('gulp-rev-replace');
 
-const config = {
-  bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets'
+const opt = {
+  bootstrapPath: './node_modules/bootstrap-sass/assets/stylesheets',
+  distFolder: './dist'
 }
 
 gulp.task('clean', (cb) => {
-  del.sync(['dist']);
+  del.sync([opt.distFolder]);
   cb();
 });
 
@@ -27,13 +30,13 @@ gulp.task('nunjucks', () => {
 			searchPaths: ['src/templates']
 		}))
     .pipe(htmlmin({collapseWhitespace: true}))
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest(opt.distFolder));
 })
 
 gulp.task('images', () => {
 	return gulp.src('./src/images/**/*')
 	  .pipe(imagemin())
-	  .pipe(gulp.dest('./dist/img'));
+	  .pipe(gulp.dest(opt.distFolder + '/img'));
 });
 
 gulp.task('styles', ['nunjucks'], () => {
@@ -48,13 +51,13 @@ gulp.task('styles', ['nunjucks'], () => {
 		.pipe(sass({
 			style: 'compressed',
 			includePaths: [
-				config.bootstrapPath
+				opt.bootstrapPath
 			]
 		}).on('error', sass.logError))
 		.pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
 		.pipe(concat('main.css'))
 		.pipe(uncss({
-			html: ['./dist/**/*.html'],
+			html: [opt.distFolder+'/**/*.html'],
 			ignore: [
 			  '.fade',
 			  '.fade.in',
@@ -67,25 +70,31 @@ gulp.task('styles', ['nunjucks'], () => {
 			 ]
 		}))
 		.pipe(nano())
-		.pipe(gulp.dest('./dist/css'));
+		.pipe(rev())
+		.pipe(gulp.dest(opt.distFolder + '/css'))
+		.pipe(rev.manifest())
+		.pipe(gulp.dest(opt.distFolder + '/css'));
 });
 
 gulp.task('fonts', function() {
   return gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('dist/fonts'))
+    .pipe(gulp.dest(opt.distFolder + '/fonts'))
 });
 
 gulp.task('favicon', function() {
   return gulp.src('src/favicon.ico')
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest(opt.distFolder))
 })
 
 gulp.task('build:s3', ['build'], () => {
-  return gulp.src('dist/**/*.html')
-    .pipe(critical({base: 'dist', inline: true, minify: true}))
-    .pipe(gulp.dest('dist'))
+	var manifest = gulp.src(opt.distFolder + '/css/rev-manifest.json');
+
+  return gulp.src(opt.distFolder + '/**/*.html')
+  	.pipe(revReplace({manifest: manifest}))
+    .pipe(critical({base: opt.distFolder, inline: true, minify: true}))
+    .pipe(gulp.dest(opt.distFolder))
     .pipe(ext_replace(''))
-    .pipe(gulp.dest('dist/pages'));
+    .pipe(gulp.dest(opt.distFolder + '/pages'));
 });
 
 gulp.task('watch', () => {
