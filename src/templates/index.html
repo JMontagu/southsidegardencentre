@@ -41,4 +41,52 @@ billboard:
       <p class="bg-success lead">Thank you, your enquiry has been sent. We'll get back to you very soon!</p>
     </div>
   </div>
+  <script>
+    (function(enquiryForm, submitButton, completeMessage) {
+      enquiryForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        enquiryForm.getElementsByTagName('fieldset')[0].setAttribute('disabled', '');
+        submitButton.getElementsByTagName('i')[0].setAttribute('style', '')
+        var message = {
+          name: enquiryForm['name'].value,
+          email: enquiryForm['email'].value,
+          message: enquiryForm['message'].value
+        };
+        enquiryForm.setAttribute('class', '')
+        sendEmail(message);
+        return false;
+      });
+      
+      function sendEmail(message) {
+        var config = { 
+          endpointUrl: 'https://0n3qh7qqj6.execute-api.us-east-1.amazonaws.com/prod/sendEmail'
+        };
+        var req = createCORSRequest('POST', config.endpointUrl);
+        if (!req) {
+          alert('Sorry, but we could not send your enquiry.')
+        }
+        req.onreadystatechange = function() {
+          if (req.readyState == 4 && req.status == 200) {
+            enquiryForm.setAttribute('class', 'hidden');
+            completeMessage.setAttribute('class', '');
+          }
+        };
+        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        req.send(JSON.stringify(message));
+      }
+      
+      function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+          xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+          xhr = new XDomainRequest();
+          xhr.open(method, url);
+        } else {
+          xhr = null;
+        }
+        return xhr;
+      }
+    })(document.getElementById('enquiryForm'), document.getElementById('enquiryFormSubmit'), document.getElementById('enquiryFormComplete'));
+  </script>
 {% endblock %}
