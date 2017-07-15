@@ -3,4 +3,8 @@
 Build
 ===
 1. ```npm install```
-2. ```gulp build``` (or just ```gulp``` for watch)
+2. ```npm start```
+
+Deploy
+===
+```npm run build```

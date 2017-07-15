@@ -70,6 +70,7 @@ gulp.task('styles', ['nunjucks'], () => {
 			 ]
 		}))
 		.pipe(nano())
+		.pipe(gulp.dest(opt.distFolder + '/css'))
 		.pipe(rev())
 		.pipe(gulp.dest(opt.distFolder + '/css'))
 		.pipe(rev.manifest())
