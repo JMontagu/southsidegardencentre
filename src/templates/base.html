@@ -22,12 +22,12 @@
     <meta property="og:image" content="http://www.southsidegardencentre.co.nz/images/logo-v1.png" />
     <meta property="og:title" content="{{title}}{{siteTitle}}" />
     <meta property="og:description" content="{{description}}" />
-    <meta property="fb:admins" content="296809793691436"/> 
+    <meta property="fb:admins" content="296809793691436"/>
 
     <!-- // END Facebook O:G Data -->
 
     <link href="css/main.css" rel="stylesheet">
-    
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -38,7 +38,7 @@
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        
+
         ga('create', 'UA-27805333-1', 'auto');
         ga('send', 'pageview');
     </script>
@@ -70,12 +70,11 @@
         </div><!--/.container-fluid -->
       </nav>
       <img class="img-responsive hidden-xs" src="{{billboard.src}}" alt="{{billboard.alt}}"/>
-      <section class="row">
+      <section itemscope itemtype="http://schema.org/Organization" class="row">
       	{% block body %}
       	Base
       	{% endblock %}
       	<aside class="col-md-3">
-			    <h4><i>Winter hours</i>:</h4>
 			    <h4 id="opening-info">Open today from 10am&mdash;4pm</h4>
 			    <ul class="fa-ul">
 			      <li>
@@ -85,18 +84,24 @@
 			        <i class="fa-li fa fa-phone" aria-hidden="true"></i><a href="tel:+6437557122">03 755 7122</a>
 			      </li>
 			      <li>
-			        <i class="fa-li fa fa-envelope-o" aria-hidden="true"></i><a class="email" href="mailto:info@southsidegardencentre.co.nz">info@southsidegardencentre.co.nz</a>
-			      </li>
-			      <li>
-			        <i class="fa-li fa fa-facebook-official" aria-hidden="true"></i><a href="https://www.facebook.com/southsidegardencentre/">Facebook</a>
-			      </li>
+              <i class="fa-li fa fa-phone" aria-hidden="true"></i><a itemprop="telephone" href="tel:+6437557122">03 755 7122</a>
+            </li>
+            <li>
+              <i class="fa-li fa fa-envelope-o" aria-hidden="true"></i><a class="email" itemprop="email" href="mailto:info@southsidegardencentre.co.nz">info@southsidegardencentre.co.nz</a>
+            </li>
+            <li>
+              <i class="fa-li fa fa-facebook-official" aria-hidden="true"></i><a itemprop="sameAs" href="https://www.facebook.com/southsidegardencentre/">Facebook</a>
+            </li>
+            <li>
+              <i class="fa-li fa fa-instagram" aria-hidden="true"></i><a itemprop="sameAs" href="https://www.instagram.com/southsidegardencentre/">Instagram</a>
+            </li>
 			      <li>
 			        <i class="fa-li fa fa-map-marker" aria-hidden="true"></i>
 			        <a href="https://goo.gl/maps/NHzVRc3JHST2">
 			          <address>
 			            <strong>Southside Garden Centre</strong><br>
 			            22 Arthurstown Rd<br>
-			            Hokitika 7883<br> 
+			            Hokitika 7883<br>
 			            New Zealand
 			          </address>
 			        </a>
