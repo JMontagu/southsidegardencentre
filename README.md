@@ -1,10 +1,10 @@
 # southsidegardencentre
 
-Build
-===
-1. ```npm install```
-2. ```npm start```
+## Build
 
-Deploy
-===
-```npm run build```
+1. ```yarn install```
+2. ```yarn start```
+
+## Deploy
+
+```yarn build```
