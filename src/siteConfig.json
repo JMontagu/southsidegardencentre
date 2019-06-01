@@ -17,5 +17,9 @@
 			"name": "Saturday in the Garden",
 			"href": "./saturday-in-the-garden"
 		}
-	]
+	],
+	"info": {
+		"message": "Open Queens Birthday Weekend 10am—4pm",
+		"hours": "Winter hours: Open Friday—Sunday from 10am to 4pm"
+	}
 }
